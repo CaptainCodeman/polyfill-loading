@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>polyfilling</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Description" content="Example to test polyfill loading">
+
+  <base href="/">
+
+  <link rel="preload" href="/scripts/index.js" as="script" crossorigin>
+  <link rel="preload" href="/scripts/views.js" as="script" crossorigin>
+  <link rel="preload" href="/scripts/store2.js" as="script" crossorigin>
+
+  <script>window.Polyfilled = new Promise(resolve => window.polyfilled = resolve)</script>
+  <script async src="https://polyfill.io/v3/polyfill.min.js?callback=polyfilled&features=IntersectionObserver,ResizeObserver,WebAnimations"></script>
+  <script async src="/scripts/index.js" type="module"></script>
+</head>
+
+<body>
+  <app-shell></app-shell>
+</body>
+
+</html>

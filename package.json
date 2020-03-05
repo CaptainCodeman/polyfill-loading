@@ -1,0 +1,26 @@
+{
+  "name": "polyfilling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Simon Green <simon@captaincodeman.com> (https://github.com/captaincodeman)",
+  "license": "ISC",
+  "devDependencies": {
+    "@captaincodeman/rdx": "^1.0.0-rc.2",
+    "@captaincodeman/rdx-model": "^1.0.0-rc.5",
+    "@captaincodeman/router": "^1.0.1",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-typescript": "^3.0.0",
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.2",
+    "rollup": "^1.32.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}
