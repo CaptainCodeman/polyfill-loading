@@ -1,22 +1,30 @@
-import { customElement, LitElement, html, css } from 'lit-element'
-
-import './app-routes'
+import { customElement, LitElement, html, property } from 'lit-element'
+import { unsafeHTML } from 'lit-html/directives/unsafe-html'
+import { connect } from '@captaincodeman/rdx'
+import { RoutingState } from '@captaincodeman/rdx-model'
+import { store, State } from '../store'
+import { baseStyle } from './shared-styles'
 
 @customElement('app-shell')
-export class AppShellElement extends LitElement {
+export class AppShellElement extends connect(store, LitElement) {
+  @property({ type: Object }) routing: RoutingState
+
+  mapState(state: State) {
+    return {
+      routing: state.routing
+    }
+  }
+  
   render() {
-    return html`
-      <app-routes></app-routes>
-    `
+    switch (this.routing.page) {
+      default:
+        return html`${unsafeHTML(`<${this.routing.page}></${this.routing.page}>`)}`
+    }
   }
 
   static get styles() {
-    return css`
-      app-routes {
-        height: 100%;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-      }
-    `
+    return [
+      baseStyle,
+    ]
   }
 }

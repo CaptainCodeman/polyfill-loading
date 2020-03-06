@@ -2,35 +2,17 @@
 
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import minify from 'rollup-plugin-minify-html-literals';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-  input: [
-    'src/index.ts',
-    'src/store.ts',
-    'src/views.ts',
-  ],
+  input: 'src/index.ts',
   output: {
     dir: 'public/scripts',
     format: 'esm',
-    chunkFileNames: '[name].js',
     sourcemap: true,
-  },
-  external: [
-    // '/scripts/store.js',
-    '/scripts/views.js',
-  ],
-  manualChunks(id) {
-    // if (id.includes('node_modules')) {
-    //   return 'vendor';
-    // }
-    if (id.includes('src/store')
-     || id.includes('node_modules/@captaincodeman/rdx')
-     || id.includes('node_modules/@captaincodeman/router')) {
-      return 'store';
-    }
   },
   plugins: [
     resolve({
@@ -42,6 +24,7 @@ export default {
         'lit-html',
       ]
     }),
+    production && minify(),
     typescript({ typescript: require('typescript') }),
     production && terser({
       output: {

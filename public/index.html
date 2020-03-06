@@ -9,8 +9,6 @@
   <base href="/">
 
   <link rel="preload" href="/scripts/index.js" as="script" crossorigin>
-  <link rel="preload" href="/scripts/views.js" as="script" crossorigin>
-  <link rel="preload" href="/scripts/store2.js" as="script" crossorigin>
 
   <script>window.Polyfilled = new Promise(resolve => window.polyfilled = resolve)</script>
   <script async src="https://polyfill.io/v3/polyfill.min.js?callback=polyfilled&features=IntersectionObserver,ResizeObserver,WebAnimations"></script>
@@ -18,7 +16,7 @@
 </head>
 
 <body>
-  <app-shell></app-shell>
+  <view-counter></view-counter>
 </body>
 
 </html>

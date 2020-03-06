@@ -1,2 +1,2 @@
-import './app-shell'
+// import './app-shell'
 import './view-counter'

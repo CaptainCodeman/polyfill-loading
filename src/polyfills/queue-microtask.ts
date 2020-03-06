@@ -1,5 +1,3 @@
-if (typeof window.queueMicrotask !== "function") {
-  window.queueMicrotask = function (callback) {
-    Promise.resolve().then(callback)
-  };
+if (typeof window.queueMicrotask !== 'function') {
+  window.queueMicrotask = callback => Promise.resolve().then(callback)
 }
