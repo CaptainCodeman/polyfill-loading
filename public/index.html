@@ -8,7 +8,14 @@
 
   <base href="/">
 
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+
   <link rel="preload" href="https://polyfill.io/v3/polyfill.min.js?callback=polyfilled&features=IntersectionObserver,ResizeObserver" as="script">
+
   <link rel="preload" href="/scripts/index.js" as="script" crossorigin="anonymous">
   <link rel="preload" href="/scripts/store.js" as="script" crossorigin="anonymous">
   <link rel="preload" href="/scripts/views.js" as="script" crossorigin="anonymous">
@@ -28,8 +35,7 @@
       ? new Promise(resolve => window.polyfilled = resolve).then(() => console.log('polyfilled'))
       : Promise.resolve()
   </script>
-  <script async
-    src="https://polyfill.io/v3/polyfill.min.js?callback=polyfilled&features=IntersectionObserver,ResizeObserver"></script>
+  <script async src="https://polyfill.io/v3/polyfill.min.js?callback=polyfilled&features=IntersectionObserver,ResizeObserver"></script>
   <script async src="/scripts/index.js" type="module"></script>
 </head>
 
