@@ -1,11 +1,10 @@
-import { customElement, LitElement, html, property } from 'lit-element'
+import { LitElement, html, property } from 'lit-element'
 import { unsafeHTML } from 'lit-html/directives/unsafe-html'
 import { connect } from '@captaincodeman/rdx'
 import { RoutingState } from '@captaincodeman/rdx-model'
 import { store, State } from '../store'
 import { baseStyle } from './shared-styles'
 
-@customElement('app-shell')
 export class AppShellElement extends connect(store, LitElement) {
   @property({ type: Object }) routing: RoutingState
 

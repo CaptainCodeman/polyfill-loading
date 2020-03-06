@@ -1,13 +1,5 @@
-import './views'
+// import './store'
+import { register } from './views'
 
-declare global {
-  interface Window {
-    Polyfilled: Promise<void>
-    ResizeObserver: any
-  }
-}
-
-window.Polyfilled.then(() => {
-  console.log('polyfilled')
-})
+window.Polyfilled.then(register)
 

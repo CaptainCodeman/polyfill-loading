@@ -1,16 +1,12 @@
-import { LitElement, customElement, property, html } from 'lit-element'
+import { LitElement, property, html } from 'lit-element'
 import { connect } from '@captaincodeman/rdx'
 import { store, State } from '../store'
 
-console.log('view-counter registered')
-
-@customElement("view-counter")
 export class CounterElement extends connect(store, LitElement) {
-  private static readonly Observer = window.Polyfilled.then(() => new IntersectionObserver(entries => entries
+  private static readonly Observer = new IntersectionObserver(entries => entries
     .filter(entry => entry.isIntersecting)
     .map(entry => <CounterElement>entry.target)
-    .forEach(el => console.log('view-counter visible', el)))
-  )
+    .forEach(_el => console.log('view-counter visible')))
 
   @property({ type: Number }) count = 0
 
@@ -22,11 +18,11 @@ export class CounterElement extends connect(store, LitElement) {
   connectedCallback() {
     super.connectedCallback()
     console.log('view-counter connected')
-    CounterElement.Observer.then(o => o.observe(this))
+    CounterElement.Observer.observe(this)
   }
 
   disconnectedCallback() {
-    CounterElement.Observer.then(o => o.unobserve(this))
+    CounterElement.Observer.unobserve(this)
     console.log('view-counter disconnected')
     super.disconnectedCallback()
   }
@@ -38,6 +34,7 @@ export class CounterElement extends connect(store, LitElement) {
   }
 
   render() {
+    console.log('view-counter render')
     return html`
       <button @click=${store.dispatch.counter.dec}>-</button>
       <span>${this.count}</span>

@@ -7,12 +7,35 @@ import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
+const views = [
+  'src/views',
+]
+
+const store = [
+  '@captaincodeman/rdx',
+  '@captaincodeman/rdx-model',
+  '@captaincodeman/router',
+  'src/store',
+]
+
+const vendor = [
+  'lit-element',
+  'lit-html',
+  'tslib',
+]
+
 export default {
   input: 'src/index.ts',
   output: {
     dir: 'public/scripts',
     format: 'esm',
+    chunkFileNames: '[name].js',
     sourcemap: true,
+  },
+  manualChunks(id) {
+    if (views.find(mod => id.includes(mod))) return 'views'
+    if (store.find(mod => id.includes(mod))) return 'store'
+    if (vendor.find(mod => id.includes(mod))) return 'vendor'
   },
   plugins: [
     resolve({
