@@ -1,5 +1,4 @@
-// import './store'
-import { register } from './views'
+import { registerViews } from './views'
 
-window.Polyfilled.then(register)
+window.Polyfilled.then(registerViews)
 
