@@ -1,4 +1,5 @@
 import { createModel } from '@captaincodeman/rdx-model'
+import { Store } from '../store'
 
 export default createModel({
   state: 0,
@@ -10,4 +11,9 @@ export default createModel({
       return state - 1;
     },
   },
+  effects: (_store: Store) => ({
+    async init() {
+      console.log('initialized store')
+    }
+  })
 })
