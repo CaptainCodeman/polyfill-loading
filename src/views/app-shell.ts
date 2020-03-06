@@ -14,11 +14,19 @@ export class AppShellElement extends connect(store, LitElement) {
     }
   }
   
-  render() {
+  router() {
     switch (this.routing.page) {
       default:
         return html`${unsafeHTML(`<${this.routing.page}></${this.routing.page}>`)}`
     }
+  }
+
+  render() {
+    return html`
+      <h1>App Shell</h1>
+      <p>The amazing app &hellip;</p>
+      ${this.router()}
+    `
   }
 
   static get styles() {

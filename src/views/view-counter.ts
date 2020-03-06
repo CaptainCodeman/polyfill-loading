@@ -36,6 +36,8 @@ export class CounterElement extends connect(store, LitElement) {
   render() {
     console.log('view-counter render')
     return html`
+      <h2>Counter</h2>
+      <p>Behold, the counter of clicks!</p>
       <button @click=${store.dispatch.counter.dec}>-</button>
       <span>${this.count}</span>
       <button @click=${store.dispatch.counter.inc}>+</button>`
