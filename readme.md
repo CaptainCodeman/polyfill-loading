@@ -175,8 +175,11 @@ When the client _does_ require polyfills, the console output shows that they are
 
 Note that there is also another polyfill in play here, shown by the message "polyfilling EventTarget". In this case, I'm inlining a very small polyfill in the store code (which is still only 2.6Kb gzipped) rather than delay it to load seperately. This is an example where following rigid rules doesn't help and it can make sense to include certain polyfills in the bundle on a case-by-case basis. When I no longer want to support those browsers that need it, I will be able to simply remove the import statement and save ~600 bytes of JavaScript.
 
-WebPageTest results show fast load time and the app code executing before the polyfills have loaded. Using the blocking technique would move the execution of those to after the polyfill script, in this case delaying them by at least 2 seconds. Instead, the page is completely loaded, interactive and idle in about 1.7 seconds on a Moto G4, showing that the need to load polyfills for _some_ browsers hasn't inpacted potential performance.
+WebPageTest results show fast load time and the app code executing before the polyfills have loaded. Using the blocking technique would force the execution of those to _after_ the polyfill script, in this case delaying them by at least 760ms (some requests take 2 seconds). Instead, the page is completely loaded, interactive and idle in about 1.4 seconds on a Moto G4, showing that the need to load polyfills for _some_ browsers hasn't inpacted potential performance.
 ![no polyfills web-page-test](images/no-polyfills-web-page-test.png)
+
+Here are the requests showing that the app code is used _before_ the page is rendered and the polyfill code doesn't hold that up for a fully-supported browser.
+![no polyfills web-page-test requests](images/no-polyfills-web-page-test-requests.png)
 
 Page Speed Insights also shows great [results](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolyfill-loading.web.app%2F):
 ![no-polyfills page-speed-insights](images/no-polyfills-page-speed-insights.png)
