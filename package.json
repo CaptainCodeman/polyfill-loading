@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "npm run build && firebase deploy --only hosting",
     "sourcemap": "npm run sourcemap:store && npm run sourcemap:views && npm run sourcemap:vendor",
     "sourcemap:store": "source-map-explorer public/scripts/store.js",
     "sourcemap:views": "source-map-explorer public/scripts/views.js",

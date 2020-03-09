@@ -4,6 +4,12 @@
     "public": "public",
     "ignore": [],
     "headers": [{
+      "source": "/",
+      "headers": [{
+        "key": "Link",
+        "value": "</scripts/index.js>;rel=preload;as=script;crossorigin,</scripts/store.js>;rel=preload;as=script;crossorigin,</scripts/views.js>;rel=preload;as=script;crossorigin,</scripts/vendor.js>;rel=preload;as=script;crossorigin,<https://polyfill.io/v3/polyfill.min.js?callback=polyfilled&features=IntersectionObserver,ResizeObserver>;rel=preload;as=script"
+      }]
+    },{
       "source": "**/*.@(jpg|jpeg|gif|png|svg|ico)",
       "headers": [{
         "key": "Cache-Control",
