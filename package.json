@@ -20,6 +20,8 @@
     "@captaincodeman/router": "^1.0.1",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@rollup/plugin-typescript": "^3.0.0",
+    "browser-sync": "^2.26.7",
+    "compression": "^1.7.4",
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.2",
     "rollup": "^1.32.0",
