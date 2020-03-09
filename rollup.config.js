@@ -1,5 +1,6 @@
 'use strict';
 
+import alias from '@rollup/plugin-alias';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import minify from 'rollup-plugin-minify-html-literals';
@@ -38,6 +39,11 @@ export default {
     if (vendor.find(mod => id.includes(mod))) return 'vendor'
   },
   plugins: [
+    alias({
+      entries: [
+        { find: 'lit-html/lib/shady-render.js', replacement: 'node_modules/lit-html/lit-html.js' },
+      ]
+    }),
     resolve({
       dedupe: [
         '@captaincodeman/rdx',
