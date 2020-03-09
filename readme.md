@@ -54,7 +54,7 @@ So here is the approach I came up with. I'll try to describe how it works step b
 
 The key thing is that we want the parts of our app that _don't_ require any polyfills to be able to start-up and be running rather than delaying the start-pistol until the polyfills are in place.
 
-What we want, ideally, is to be able to load both the app and the polyfills asynchronously and the app wait to use anything that might have been polyfilled until it gets the OK that has been completed. So right away, we will loose something - our applications blindness to polyfills. It will need to know which features _may_ have been polyfilled. Such is the price of performance, but it's not a huge price to pay.
+What we want, ideally, is to be able to load both the app and the polyfills asynchronously and the app wait to use anything that might have been polyfilled until it gets the OK that has been completed. So right away, we will loose something - our application's blindness to polyfills. It will need to know which features _may_ have been polyfilled. Such is the price of performance, but it's not a huge price to pay.
 
 Let's start by adding the `async` attribute to the script elements and also add an additional `callback` parameter to the pollyfill.io URL:
 
