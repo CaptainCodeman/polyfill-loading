@@ -132,6 +132,8 @@ The speed-up comes where the flag is false when the browser already has a native
 </script>
 ```
 
+## Results
+
 So what about the results?
 
 Try the [live demo app](https://polyfill-loading.web.app/) yourself and checkout the [source code](https://github.com/CaptainCodeman/polyfill-loading). Here it is executing in all major browsers:
@@ -140,14 +142,22 @@ Try the [live demo app](https://polyfill-loading.web.app/) yourself and checkout
 
 The code is split into 3 main bundles.
 
-*store* contains the client-side routing, state store, local-storage persistence and Redux dev-tools integration:
+### store bundle
+
+contains the client-side routing, state store, local-storage persistence and Redux dev-tools integration:
 ![source-map-explorer store](images/source-map-store.png)
 
-*views* contains the lit-element views for the app-shell and counter component:
+### views bundle
+
+contains the lit-element views for the app-shell and counter component:
 ![source-map-explorer views](images/source-map-views.png)
 
-*vendor* contains the lit-element and lit-html templating libraries:
+### vendor bundle
+
+contains the lit-element and lit-html templating libraries:
 ![source-map-explorer views](images/source-map-vendor.png)
+
+## Output
 
 Here are the network requests showing the polyfill.io file and the three app modules loading (store, vendor and views):
 ![no polyfills network](images/no-polyfills-network.png)
@@ -165,7 +175,7 @@ When the client _does_ require polyfills, the console output shows that they are
 
 Note that there is also another polyfill in play here, shown by the message "polyfilling EventTarget". In this case, I'm inlining a very small polyfill in the store code (which is still only 2.6Kb gzipped) rather than delay it to load seperately. This is an example where following rigid rules doesn't help and it can make sense to include certain polyfills in the bundle on a case-by-case basis. When I no longer want to support those browsers that need it, I will be able to simply remove the import statement and save ~600 bytes of JavaScript.
 
-WebPageTest results show fast load time and the app code executing before the polyfills have loaded. Using the blocking technique would move the execution of those to after the polyfill script, in this case delaying them by at least 2 seconds.
+WebPageTest results show fast load time and the app code executing before the polyfills have loaded. Using the blocking technique would move the execution of those to after the polyfill script, in this case delaying them by at least 2 seconds. Instead, the page is completely loaded, interactive and idle in about 1.7 seconds on a Moto G4, showing that the need to load polyfills for _some_ browsers hasn't inpacted potential performance.
 ![no polyfills web-page-test](images/no-polyfills-web-page-test.png)
 
 Page Speed Insights also shows great [results](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolyfill-loading.web.app%2F):
