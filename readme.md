@@ -111,11 +111,11 @@ An alternative to delaying the registration of all the UI components this way wo
 
 So we've gained the ability to load the polyfills and app asynchronously which buys us some speed. But the majority of our users may not need to load the polyfills at all and as time goes on we'd hope that number will keep going up. So how do we avoid having the delay for the empty polyfill file?
 
-The solution is to incorporate the same guards that gthe polyfill libraries typically use to avoid overwriting the native implementation if one is already available. These are typically simple feature detection checks that test for their existence.
+The solution is to incorporate the same guards that the polyfill libraries typically use to avoid overwriting the native implementation if one is already available. These are typically simple feature detection checks that test for their existence.
 
-Here is an example of testing for native support for the Intersection and Resize observers to set a `polyfillsRequired` flag. If any of the polyfills _are_ required then the flag is set to true and the Promise is setup to wait for the callback from the polyfill.io library. Remember, we only need to check if _any_ polyfill is needed - the service will handle only sending us those that are actually needed.
+Here is an example of testing for native support for the Intersection and Resize observers to set a `polyfillsRequired` flag. If any of the polyfills _are_ required then the flag is set to true and the Promise is setup to wait for the callback from the polyfill.io library. Remember, we only need to check if _any_ polyfill is necessary - the service will handle only sending us the code for those that are actually required.
 
-The speedup comes where the flag is false when the browser already has a native implementation. In this case the Promise is set to already be resolved which will remove any waiting on the polyfill.io library loading. The polyfill.io library will still be requested, but will just return the almost empty file (actually, it will just check if there is a global `polyfilled` function) but because it's async and we're not waiting on it it won't delay anything in our app and it's simpler and more efficient that introducing any dynamic script loading to just avoid this small request.
+The speed-up comes where the flag is false when the browser already has a native implementation. In this case the Promise is set to already be resolved which will remove any waiting on the polyfill.io library loading. The polyfill.io library will still be requested, but will just return the almost empty file (actually, it will just check if there is a global `polyfilled` function) but because it's async and we're not waiting on it it won't delay anything in our app and it's simpler and more efficient that introducing any dynamic script loading to just avoid this small request.
 
 ```html
 <script>
@@ -134,7 +134,7 @@ The speedup comes where the flag is false when the browser already has a native 
 
 So what about the results?
 
-Try the [live demo app](https://polyfill-loading.web.app/) yourself.
+Try the [live demo app](https://polyfill-loading.web.app/) yourself and checkout the [source code](https://github.com/CaptainCodeman/polyfill-loading).
 
 The code is split into 3 main bundles.
 
@@ -158,9 +158,6 @@ Adding some additional console.logs shows whether the polyfills are required and
 The performance tab also shows the views module being executed nice and early, with no delay caused by the polyfills:
 ![no polyfills views](images/no-polyfills-views.png)
 
-As you'd expect, we get top marks from the lighthouse score:
-![no polyfills performance](images/no-polyfills-performance.png)
-
 When the client _does_ require polyfills, the console output shows that they are loaded:
 ![polyfilled console](images/polyfilled-console.png)
 
@@ -169,12 +166,11 @@ Note that there is also another polyfill in play here, shown by the message "pol
 WebPageTest results show fast load time and the app code executing before the polyfills have loaded. Using the blocking technique would move the execution of those to after the polyfill script, in this case delaying them by at least 824ms.
 ![no polyfills web-page-test](images/no-polyfills-web-page-test.png)
 
-Page Speed Insights also shows great results:
+That's [under 2 seconds on the Moto G4 mobile test](https://www.webpagetest.org/result/200308_C4_f0cf103bf297033aa703d6491f2e6535/)
+
+Page Speed Insights also shows great [results](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolyfill-loading.web.app%2F):
 ![no-polyfills page-speed-insights](images/no-polyfills-page-speed-insights.png)
 
-## Refs
+## Final Thoughts
 
-https://www.webpagetest.org/result/200308_C4_f0cf103bf297033aa703d6491f2e6535/
-https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolyfill-loading.web.app%2F
-
-If you're using a service-worker, the polyfill.io script should be set to cache locally.
+There are of course additional things to speed up your app such as adding service-worker caching but the techniques shown here add to that - the polyfill.io script should be set to cache locally and the app will start faster because only the polyfills required will be loaded.
