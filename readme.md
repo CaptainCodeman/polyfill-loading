@@ -75,10 +75,10 @@ This now gives us a global `Polyfilled` promise that we can use any time we need
 
 Now the observant among you might now be thinking "erm, Captain ... what if I need to support IE11, which doesn't have Promises - how do I pollyfill _those_ if I need them first to do the polyfilling?!?". Yes, that is a problem. One option would be to embed [the _tiniest_ Promise polyfill you could find](https://github.com/bramstein/promis) into the inline script or another would be to implement a minimal Promise-like object that will allow other code to wait on it using the same `.then(callback)` syntax which would then allow you to load the _full_ Promise polyfill from the service (if other parts of your code require it, which is likely).
 
-Here's a minimal 206 byte implementation that's hardly much bigger than the Promise setup snippet above and could be inlined in it's place:
+Here's a minimal 199 byte implementation that's hardly much bigger than the Promise setup snippet above and could be inlined in it's place:
 
 ```js
-window.Polyfilled={r:!1,cbs:[],then(l){this.r?l():this.cbs.push(l)},resolve(){for(var l=0;l<this.cbs.length;l++)this.cbs[l]();this.r=!0}},window.polyfilled=window.Polyfilled.resolve.bind(window.Polyfilled);
+window.Polyfilled={cbs:[],then(l){this.cbs.push(l)},resolve(){for(var l=0;l<this.cbs.length;l++)this.cbs[l]();this.then=(l=>l())}},window.polyfilled=window.Polyfilled.resolve.bind(window.Polyfilled);
 ```
 
 OK, so we have a callback which will resolve our Promise, all that's left is to decide where in our code we want to "wait" on it.
