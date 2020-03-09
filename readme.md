@@ -134,7 +134,9 @@ The speed-up comes where the flag is false when the browser already has a native
 
 So what about the results?
 
-Try the [live demo app](https://polyfill-loading.web.app/) yourself and checkout the [source code](https://github.com/CaptainCodeman/polyfill-loading).
+Try the [live demo app](https://polyfill-loading.web.app/) yourself and checkout the [source code](https://github.com/CaptainCodeman/polyfill-loading). Here it is executing in all major browsers:
+
+![cross-browser-support](images/cross-browser-support.png)
 
 The code is split into 3 main bundles.
 
