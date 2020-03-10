@@ -2,7 +2,7 @@
 
 Example project to show async polyfill loading for browser compatibility without slowdowns.
 
-See [blog post](https://www.captaincodeman.com/2020/03/10/eternal-polyfilling-of-the-legacy-browser) for details.
+See [live example](https://polyfill-loading.web.app/) and [blog post](https://www.captaincodeman.com/2020/03/10/eternal-polyfilling-of-the-legacy-browser) for full details.
 
 ## Requirements
 
